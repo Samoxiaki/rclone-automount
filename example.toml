@@ -1,0 +1,18 @@
+[environment]
+rclone_bin = "/usr/bin/rclone"
+rclone_conf = "~/.config/rclone/rclone.conf"
+fusermount_bin = "/usr/bin/fusermount"
+
+[mountpoints.example1]
+remote = "Ex1:example/dir/path"
+mount_dir = "/mnt/Ex1"
+allow_other = true
+vfs_cache_mode = "full"
+
+
+[mountpoints.example2]
+enabled = false
+remote = "Ex2:/home/user/dir/path"
+mount_dir = "/mnt/Ex2"
+allow_other = true
+vfs_cache_mode = "minimal"
