@@ -54,7 +54,7 @@ pub async fn rclone_mount(environment: &Environment, mountpoint: &MountPoint, mo
         .map_err(|e| format!("Failed to start mount command: {}", e))?;
 
 
-    if !(status.success() || status.code() == Some(130)) {
+    if !(status.success() || (status.code().unwrap_or(0) >= 128 && status.code().unwrap_or(0) <= 143)) {
         return Err(format!("Mount command for {} exited with status: {}", mountpoint_name, status));
     } 
 	return Ok(());
