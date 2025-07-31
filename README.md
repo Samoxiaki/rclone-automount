@@ -91,7 +91,7 @@ After=network-online.target
 [Service]
 Type=simple
 User=myuser
-ExecStart=/usr/bin/rclone-automount /path/to/rclone-automount/config.toml
+ExecStart=/usr/bin/rclone-automount /etc/rclone-automount/config.toml
 Restart=on-failure
 
 [Install]
