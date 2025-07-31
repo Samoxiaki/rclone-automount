@@ -1,6 +1,6 @@
 use std::{collections::{HashMap, HashSet}, sync::Arc};
 
-use rclone_automount::{models::{Environment, MountPoint}, tasks::{rclone_mount, rclone_unmount, read_config}, utils::expand_home};
+use rclone_automount::{models::{Environment, MountPoint}, tasks::{rclone_mount, rclone_unmount, read_config}, utils::{expand_home, wait_for_shutdown}};
 use tokio::{sync::Mutex, task::JoinSet};
 use tracing_subscriber;
 
@@ -81,8 +81,7 @@ async fn main() {
 	}
 
 
-	let _ = tokio::signal::ctrl_c().await;
-   	tracing::info!("Received SIGINT, unmounting all mount points...");
+	let _ = wait_for_shutdown().await;
 
 
 	let mut unmount_mountpoints: HashMap<String, MountPoint> = HashMap::new();
